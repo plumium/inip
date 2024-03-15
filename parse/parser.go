@@ -1,5 +1,7 @@
 package parse
 
+import "strings"
+
 func Parse(name string, input string) *Ini {
 	lex := NewLexer(name, input)
 	ini := &Ini{FileName: name, Sections: make([]*Section, 0)}
@@ -14,9 +16,9 @@ func Parse(name string, input string) *Ini {
 			sec = &Section{Name: t.Value, KeyValues: make([]*KeyValue, 0)}
 			ini.Sections = append(ini.Sections, sec)
 		case tokenKey:
-			kv = &KeyValue{Key: t.Value, Value: ""}
+			kv = &KeyValue{Key: strings.TrimSpace(t.Value), Value: ""}
 		case tokenValue:
-			kv.Value = t.Value
+			kv.Value = strings.TrimSpace(t.Value)
 			sec.KeyValues = append(sec.KeyValues, kv)
 		}
 	}
