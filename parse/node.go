@@ -1,16 +1,16 @@
 package parse
 
 type Ini struct {
-	FileName string
-	Sections []*Section
+	FileName string     `json:"fileName"`
+	Sections []*Section `json:"sections"`
 }
 
 type Section struct {
-	Name      string
-	KeyValues []*KeyValue
+	Name      string      `json:"name"`
+	KeyValues []*KeyValue `json:"keyValues"`
 }
 
 type KeyValue struct {
-	Key   string
-	Value string
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }
